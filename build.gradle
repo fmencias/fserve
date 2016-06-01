@@ -12,6 +12,7 @@ configurations {
 
 javadoc {
   failOnError = false
+  classpath = configurations.compile + configurations.providedCompile
 }
 
 task javadocJar(type: Jar) {
@@ -34,7 +35,7 @@ signing {
 
 group = "com.clouway"
 archivesBaseName = "fserve"
-version = "1.0"
+version = "1.0-SNAPSHOT"
 
 uploadArchives {
   repositories {
@@ -42,18 +43,18 @@ uploadArchives {
       beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
       repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: '', password: '')
+        authentication(userName: ossrhUsername, password: ossrhPassword)
       }
 
       snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-        authentication(userName: '', password: '')
+        authentication(userName: ossrhUsername, password: ossrhPassword)
       }
 
       pom.project {
         name 'fserve a friendly serving HTTP library'
         packaging 'jar'
         // optionally artifactId can be defined here
-        description 'A application used as an example on how to set up pushing  its components to the Central Repository.'
+        description 'fserve a friendly serving HTTP library'
         url 'https://github.com/clouway/fserve'
 
         scm {
@@ -85,7 +86,7 @@ dependencies {
   compile 'com.google.guava:guava:18.0'
   compile 'com.google.code.gson:gson:2.6.2'
 
-  providedCompile "javax.servlet:servlet-api:2.5"
+  providedCompile 'javax.servlet:servlet-api:2.5'
 
   testCompile 'junit:junit:4.11'
   testCompile 'org.hamcrest:hamcrest-all:1.3'

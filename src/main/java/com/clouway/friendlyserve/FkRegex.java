@@ -8,14 +8,15 @@ import java.util.regex.Pattern;
 
 /**
  * Fork by regular expression pattern.
- * <p/>
+ *
  * <p>Use this class in combination with {@link TkFork},
  * for example:
- * <p/>
+ *
  * <pre> Take take = new TkFork(
  *   new FkRegex("/home", new TkHome()),
  *   new FkRegex("/account", new TkAccount())
  * );</pre>
+ *
  *
  * @author Miroslav Genov (miroslav.genov@clouway.com)
  */

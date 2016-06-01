@@ -16,6 +16,7 @@ public interface Fork {
    *
    * @param request the request to be routed
    * @return an optional response
+   * @throws IOException is thrown if IO error occurrs during processing
    */
   Optional<Response> route(Request request) throws IOException;
 }
