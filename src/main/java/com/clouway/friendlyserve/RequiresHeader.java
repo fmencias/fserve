@@ -7,8 +7,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 /**
  * RequiresHeader is a decorator class over {@link Take} that checks whether the provided header is passed to the request
  * or not. If it's not passed then bad request is returned as response otherwise request is passed to provided origin.
- *
- * <p> This class is use-full as validation clause to verify that certain header is passed.
+ * <p>This class is use-full as validation clause to verify that certain header is passed.</p>
  *
  * @author Miroslav Genov (miroslav.genov@clouway.com)
  */

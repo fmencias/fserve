@@ -1,14 +1,16 @@
 package com.clouway.friendlyserve;
 
+import com.clouway.friendlyserve.testing.FakeRequest;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
 
 import java.io.IOException;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 
 /**
@@ -25,7 +27,7 @@ public class TkForkTest {
       }
     });
 
-    Response response = fork.ack(new ByteRequest("/test", ImmutableMap.<String, String>of(), "test".getBytes()));
+    Response response = fork.ack(new FakeRequest("/test", ImmutableMap.<String, String>of(), "test".getBytes()));
     assertThat(new RsPrint(response).printBody(), startsWith("text message"));
   }
 
@@ -47,7 +49,7 @@ public class TkForkTest {
             }
     );
 
-    Response response = fork.ack(new ByteRequest("/another", ImmutableMap.<String, String>of(), "test".getBytes()));
+    Response response = fork.ack(new FakeRequest("/another", ImmutableMap.<String, String>of(), "test".getBytes()));
     assertThat(new RsPrint(response).printBody(), startsWith("another message"));
   }
 
@@ -62,7 +64,7 @@ public class TkForkTest {
     });
 
     try {
-      fork.ack(new ByteRequest("/test", ImmutableMap.<String, String>of(), "test".getBytes()));
+      fork.ack(new FakeRequest("/test", ImmutableMap.<String, String>of(), "test".getBytes()));
       fail("exception wasn't throw when route was not found?");
     } catch (HttpException e) {
       assertThat(e.code(), is(404));

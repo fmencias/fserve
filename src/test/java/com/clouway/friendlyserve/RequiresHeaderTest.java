@@ -1,5 +1,6 @@
 package com.clouway.friendlyserve;
 
+import com.clouway.friendlyserve.testing.FakeRequest;
 import com.google.common.collect.ImmutableMap;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;
@@ -12,7 +13,7 @@ import java.net.HttpURLConnection;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Miroslav Genov (miroslav.genov@clouway.com)
@@ -28,7 +29,7 @@ public class RequiresHeaderTest {
   @Test
   public void headerIsProvided() throws IOException {
 
-    final Request request = new ByteRequest(
+    final Request request = new FakeRequest(
             ImmutableMap.<String, String>of(),
             ImmutableMap.of("Authorization", "aaaa"));
 
@@ -44,7 +45,7 @@ public class RequiresHeaderTest {
   @Test
   public void headerIsEmpty() throws IOException {
     Response response = new RequiresHeader("Authorization", origin)
-            .ack(new ByteRequest(ImmutableMap.<String, String>of(), ImmutableMap.of("Authorization", "")));
+            .ack(new FakeRequest(ImmutableMap.<String, String>of(), ImmutableMap.of("Authorization", "")));
     assertThat(response.status().code, is(equalTo(HttpURLConnection.HTTP_BAD_REQUEST)));
   }
 

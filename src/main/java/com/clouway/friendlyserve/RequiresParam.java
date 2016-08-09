@@ -7,8 +7,10 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 /**
  * RequiresParam is a decorating class over {@link Fork} which checks whether the provided param is passed with the request.
  *
- * <p>In cases when param is not passed, the route method is throwing {@link HttpException} with BAD_REQUEST value to indicate
+ * <p>
+ * In cases when param is not passed, the route method is throwing {@link HttpException} with BAD_REQUEST value to indicate
  * that some of the params is missing.
+ * </p>
  *
  * @author Miroslav Genov (miroslav.genov@clouway.com)
  */

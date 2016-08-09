@@ -5,16 +5,19 @@ import com.google.common.base.Optional;
 import java.io.IOException;
 
 /**
- * Fork by query params and there values, matched by simple comparison.
+ * RequestHandlerMatchingParam is an optional handler which could handle request only if the requested param is matching
+ * the provided value.
+ *
+ * <p> An absent value will be returned when parameter value is not matching.
  *
  * @author Miroslav Genov (miroslav.genov@clouway.com)
  */
-public class FkParams implements Fork {
+public class RequestHandlerMatchingParam implements Fork {
   private final String key;
   private final String value;
   private final Take take;
 
-  public FkParams(String key, String value, Take take) {
+  public RequestHandlerMatchingParam(String key, String value, Take take) {
     this.key = key;
     this.value = value;
     this.take = take;
