@@ -1,0 +1,40 @@
+apply plugin: 'java'
+
+description = 'A helper testing package of friendly serving HTTP library'
+
+repositories {
+  mavenCentral()
+}
+
+javadoc {
+  failOnError = false
+}
+
+task javadocJar(type: Jar) {
+  classifier = 'javadoc'
+  from javadoc
+}
+
+task sourcesJar(type: Jar) {
+  classifier = 'sources'
+  from sourceSets.main.allSource
+}
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      artifact javadocJar {
+        classifier "javadoc"
+      }
+
+      artifact sourcesJar {
+        classifier "sources"
+      }
+    }
+  }
+}
+
+
+dependencies {
+  compile project(':fserve')
+}

@@ -29,6 +29,7 @@ public class TkRequestWrap implements Request {
     return req.getParameter(name);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public Iterable<String> names() {
     return req.getParameterMap().keySet();
