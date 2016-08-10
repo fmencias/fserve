@@ -39,9 +39,36 @@ In Maven:
 
 ```
 
+ * Library will be available and in maven central after version 0.1 is released.
 
 ### Adapters
  * Servlet API Adapter - provides a basic HTTP helper classes for calling fserve directly from the servlet API
+
+```java
+private ServletApiSupport servletApiSupport;
+
+@Override
+public void init(ServletConfig servletConfig) throws ServletException {
+  super.init(servletConfig);
+
+  fork = new TkFork(
+        new FkRegex("/hello", new Take() {
+        @Override
+        public Response ack(Request request) throws IOException {
+            return new RsText("Hello !!!");
+        }
+    })
+  );
+
+  servletApiSupport = new ServletApiSupport(fork);
+}
+
+
+@Override
+protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  servletApiSupport.serve(req, resp);
+}
+```
 
 
 ### Additional Notes
