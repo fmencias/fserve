@@ -39,7 +39,7 @@ In Maven:
 
 ```
 
- * Library will be available and in maven central after version 0.1 is released.
+**Remarks:** library will be available and in maven central after version 0.1 is released.
 
 ### Adapters
  * Servlet API Adapter - provides a basic HTTP helper classes for calling fserve directly from the servlet API
