@@ -12,6 +12,34 @@ A friendly API for serving HTTP http request (friendly http serving).
   );
 ```
 
+### Adding as dependency
+
+In Gradle:
+```groovy
+
+repositories {
+  mavenCentral()
+  maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+     compile 'com.clouway.fserve:fserve:0.1-SNAPSHOT'
+}
+```
+
+In Maven:
+
+```xml
+
+ <dependency>
+    <groupId>com.clouway.fserve</groupId>
+    <artifactId>fserve</artifactId>
+    <version>0.1-SNAPSHOT</version>
+ </dependency>
+
+```
+
+
 ### Adapters
  * Servlet API Adapter - provides a basic HTTP helper classes for calling fserve directly from the servlet API
 
