@@ -1,6 +1,8 @@
 package com.clouway.friendlyserve;
 
 import com.clouway.friendlyserve.testing.FakeRequest;
+import com.clouway.friendlyserve.testing.ParamRequest;
+import com.clouway.friendlyserve.testing.RsPrint;
 import com.google.common.collect.ImmutableMap;
 import org.jmock.Expectations;
 import org.jmock.auto.Mock;

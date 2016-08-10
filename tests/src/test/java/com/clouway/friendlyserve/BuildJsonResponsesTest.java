@@ -1,5 +1,6 @@
 package com.clouway.friendlyserve;
 
+import com.clouway.friendlyserve.testing.RsPrint;
 import com.google.gson.JsonObject;
 import org.junit.Test;
 

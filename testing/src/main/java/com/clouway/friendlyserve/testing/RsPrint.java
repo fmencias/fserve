@@ -1,5 +1,7 @@
-package com.clouway.friendlyserve;
+package com.clouway.friendlyserve.testing;
 
+import com.clouway.friendlyserve.Response;
+import com.clouway.friendlyserve.Status;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 

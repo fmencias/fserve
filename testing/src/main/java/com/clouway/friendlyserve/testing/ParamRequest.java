@@ -1,5 +1,6 @@
-package com.clouway.friendlyserve;
+package com.clouway.friendlyserve.testing;
 
+import com.clouway.friendlyserve.Request;
 import com.google.common.collect.Lists;
 
 import java.io.ByteArrayInputStream;
