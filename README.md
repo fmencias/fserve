@@ -53,10 +53,10 @@ public void init(ServletConfig servletConfig) throws ServletException {
 
   fork = new TkFork(
         new FkRegex("/hello", new Take() {
-        @Override
-        public Response ack(Request request) throws IOException {
-            return new RsText("Hello !!!");
-        }
+            @Override
+            public Response ack(Request request) throws IOException {
+                return new RsText("Hello !!!");
+            }
     })
   );
 
