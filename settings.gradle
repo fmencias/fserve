@@ -1,2 +1,1 @@
-//include 'fserve', 'testing', 'tests'
-include 'fserve'
+include 'fserve', 'testing', 'tests'
