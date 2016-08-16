@@ -1,5 +1,15 @@
 apply plugin: 'java'
+apply plugin: 'com.bmuschko.nexus'
 
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+  }
+}
 
 repositories {
   mavenCentral()
@@ -7,36 +17,57 @@ repositories {
 
 allprojects {
   apply plugin: 'java'
-  apply plugin: 'maven-publish'
+  apply plugin: 'com.bmuschko.nexus'
 
   sourceCompatibility = 1.7
   targetCompatibility = 1.7
 
   group = 'com.clouway.fserve'
-  version = '0.1-SNAPSHOT'
+  version = '0.1'
 
-  publishing {
-    publications {
-      mavenJava(MavenPublication) {
-        pom.withXml {
-          asNode().appendNode('description',project.description)
+  modifyPom {
+    project {
+      name 'Friendly Serving HTTP Library'
+      description 'Friendly Serving HTTP Library.'
+      url 'https://github.com/clouway/fserve'
+      inceptionYear '2016'
+
+      scm {
+        url 'https://github.com/clouway/fserve'
+        connection 'scm:https://clouway@github.com/clouway/fserve.git'
+        developerConnection 'scm:git://github.com/clouway/fserve.git'
+      }
+
+      licenses {
+        license {
+          name 'The Apache Software License, Version 2.0'
+          url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          distribution 'repo'
         }
-        from components.java
+      }
+
+      developers {
+        developer {
+          id 'telcong'
+          name 'Telcong Bot'
+          email 'telcong@clouway.com'
+        }
       }
     }
   }
 
-  publishing {
-    repositories {
-      maven {
-        url "${project.version.endsWith('-SNAPSHOT') ? 'https://oss.sonatype.org/content/repositories/snapshots/' : 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'}"
-        credentials {
-          username ossrhUsername
-          password ossrhPassword
-        }
-      }
-    }
+  extraArchive {
+    sources = true
+    tests = false
+    javadoc = true
   }
+
+  nexus {
+    sign = true
+    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots'
+  }
+
 
 }
 
