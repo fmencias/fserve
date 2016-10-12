@@ -27,7 +27,7 @@ public class BuildJsonResponsesTest {
     JsonObject jsonObject = new JsonObject();
     jsonObject.addProperty("key1", "value1");
     RsJson json = new RsJson(jsonObject);
-    assertThat(new RsPrint(json).print(), is(equalTo("Content-Type: application/json\r\n{\"key1\":\"value1\"}")));
+    assertThat(new RsPrint(json).print(), is(equalTo("Content-Type: application/json; charset=utf-8\r\n{\"key1\":\"value1\"}")));
   }
 
   @Test
@@ -36,7 +36,7 @@ public class BuildJsonResponsesTest {
     jsonObject.addProperty("::key1::", "::value1::");
     jsonObject.addProperty("::key2::", "::value2::");
     RsJson json = new RsJson(jsonObject);
-    assertThat(new RsPrint(json).print(), is(equalTo("Content-Type: application/json\r\n{\"::key1::\":\"::value1::\",\"::key2::\":\"::value2::\"}")));
+    assertThat(new RsPrint(json).print(), is(equalTo("Content-Type: application/json; charset=utf-8\r\n{\"::key1::\":\"::value1::\",\"::key2::\":\"::value2::\"}")));
   }
 
   @Test

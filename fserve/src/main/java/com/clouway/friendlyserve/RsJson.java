@@ -23,10 +23,7 @@ public class RsJson extends RsWrap {
   }
 
   public RsJson(final Response res) {
-    super(new RsWithType(res,
-                    "application/json"
-            )
-    );
+    super(new RsWithType(res,"application/json; charset=utf-8"));
   }
 
   private static InputStream streaming(JsonElement src) {
