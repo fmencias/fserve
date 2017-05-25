@@ -6,13 +6,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Miroslav Genov (miroslav.genov@clouway.com)
  */
-public class TkRequestWrap implements Request {
+public class TkRequestWrap implements RequestExt {
   private final transient HttpServletRequest req;
 
   public TkRequestWrap(HttpServletRequest req) {
@@ -39,7 +40,7 @@ public class TkRequestWrap implements Request {
   public Iterable<String> cookie(String name) {
     Cookie[] cookies = req.getCookies();
     if (cookies == null) {
-      return new LinkedList<String>();
+      return Collections.emptyList();
     }
 
     List<String> values = Lists.newLinkedList();
@@ -59,5 +60,42 @@ public class TkRequestWrap implements Request {
   @Override
   public InputStream body() throws IOException {
     return req.getInputStream();
+  }
+
+  @Override
+  public String method() {
+    return req.getMethod();
+  }
+
+  @Override
+  public StringBuffer url() {
+    return req.getRequestURL();
+  }
+
+  @Override
+  public String queryString() {
+    return req.getQueryString();
+  }
+
+  @Override
+  public String contentType() {
+    return req.getContentType();
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public Iterable<String> headerNames() {
+    return Collections.list(req.getHeaderNames());
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public Map<String, String[]> params() {
+    return req.getParameterMap();
+  }
+
+  @Override
+  public String remoteAddress() {
+    return req.getRemoteAddr();
   }
 }
