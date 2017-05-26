@@ -87,9 +87,10 @@ public class Cookie {
   @Override
   public String toString() {
     return MoreObjects.toStringHelper(this)
+            .add("path", path)
             .add("name", name)
             .add("value", value)
+            .add("expirationTimeInSeconds", expirationTimeInSeconds)
             .toString();
   }
-
 }
