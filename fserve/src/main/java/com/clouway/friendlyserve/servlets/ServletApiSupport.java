@@ -1,5 +1,6 @@
 package com.clouway.friendlyserve.servlets;
 
+import com.clouway.friendlyserve.Cookie;
 import com.clouway.friendlyserve.HttpException;
 import com.clouway.friendlyserve.Response;
 import com.clouway.friendlyserve.Status;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ServletApiSupport is an adapter class which adapts the Servlet API into fserve to provide seamless integration.
@@ -30,6 +33,8 @@ import java.util.Map;
  * @author Miroslav Genov (miroslav.genov@clouway.com)
  */
 public final class ServletApiSupport {
+  private static Logger logger = Logger.getLogger(ServletApiSupport.class.getName());
+
   private final Take take;
 
   public ServletApiSupport(Take take) {
@@ -62,6 +67,14 @@ public final class ServletApiSupport {
         resp.setHeader(key, header.get(key));
       }
 
+      for (Cookie each : response.cookies()) {
+        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(each.name(), each.value());
+        cookie.setPath(each.path());
+        cookie.setMaxAge(each.expirationTimeInSeconds());
+        
+        resp.addCookie(cookie);
+      }
+
       ServletOutputStream out = resp.getOutputStream();
 
       try (InputStream inputStream = response.body()) {
@@ -72,8 +85,10 @@ public final class ServletApiSupport {
 
     } catch (HttpException e) {
       resp.setStatus(e.code());
+    } catch (Exception e) { // got internal error
+      logger.log(Level.SEVERE, "could not handle the request", e);
+      resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
-
-
+    
   }
 }

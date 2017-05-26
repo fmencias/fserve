@@ -1,5 +1,6 @@
 package com.clouway.friendlyserve.testing;
 
+import com.clouway.friendlyserve.Cookie;
 import com.clouway.friendlyserve.Response;
 import com.clouway.friendlyserve.Status;
 import com.google.gson.JsonObject;
@@ -11,6 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -67,6 +69,11 @@ public class RsPrint implements Response {
 
     }
 
+  }
+  
+  @Override
+  public Iterable<Cookie> cookies() {
+    return Collections.emptyList();
   }
 
   @Override

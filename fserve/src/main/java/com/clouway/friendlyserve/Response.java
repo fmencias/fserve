@@ -12,6 +12,13 @@ import java.util.Map;
 public interface Response {
 
   /**
+   * Gets the list of cookies to be set.
+   *
+   * @return a list of cookies to be set
+   */
+  Iterable<Cookie> cookies();
+
+  /**
    * A redirect URL address used to delegate.
    *
    * @return the redirect url if specified

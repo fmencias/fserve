@@ -19,6 +19,11 @@ public class RsWrap implements Response {
   }
 
   @Override
+  public Iterable<Cookie> cookies() {
+    return origin.cookies();
+  }
+
+  @Override
   public Status status() {
     return origin.status();
   }

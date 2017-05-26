@@ -2,38 +2,38 @@ package com.clouway.friendlyserve;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
  * @author Miroslav Genov (miroslav.genov@clouway.com)
  */
-public class RsWithBody extends RsWrap {
+public class RsWithCookie extends RsWrap {
 
-  public RsWithBody(InputStream in) {
-    this(new RsEmpty(), in);
+  public RsWithCookie(Cookie cookie) {
+    this(new RsEmpty(), cookie);
   }
 
-  public RsWithBody(final Response response, final InputStream body) {
+  public RsWithCookie(final Response origin, final Cookie... cookie) {
     super(new Response() {
       @Override
       public Iterable<Cookie> cookies() {
-        return Collections.emptyList();
+        return Arrays.asList(cookie);
       }
 
       @Override
       public Status status() {
-        return response.status();
+        return origin.status();
       }
 
       @Override
       public Map<String, String> header() throws IOException {
-        return response.header();
+        return origin.header();
       }
 
       @Override
       public InputStream body() throws IOException {
-        return body;
+        return origin.body();
       }
     });
   }

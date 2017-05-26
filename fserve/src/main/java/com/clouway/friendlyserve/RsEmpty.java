@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -14,6 +15,11 @@ import java.util.Map;
  * @author Miroslav Genov (miroslav.genov@clouway.com)
  */
 public class RsEmpty implements Response {
+
+  @Override
+  public Iterable<Cookie> cookies() {
+    return Collections.emptyList();
+  }
 
   @Override
   public Status status() {

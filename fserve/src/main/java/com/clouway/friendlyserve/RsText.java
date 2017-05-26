@@ -18,6 +18,11 @@ public class RsText implements Response {
   }
 
   @Override
+  public Iterable<Cookie> cookies() {
+    return Collections.emptyList();
+  }
+
+  @Override
   public Status status() {
     return new Status(HttpURLConnection.HTTP_OK);
   }

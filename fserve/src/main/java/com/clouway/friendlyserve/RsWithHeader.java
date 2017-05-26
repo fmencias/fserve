@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -18,6 +19,11 @@ public class RsWithHeader extends RsWrap {
 
   public RsWithHeader(final Response res, final String key, final String value) {
     super(new Response() {
+      @Override
+      public Iterable<Cookie> cookies() {
+        return Collections.emptyList();
+      }
+
       @Override
       public Status status() {
         return new Status(HttpURLConnection.HTTP_OK);
