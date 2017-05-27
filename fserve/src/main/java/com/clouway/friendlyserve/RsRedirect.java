@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
  */
 public class RsRedirect extends RsWrap {
 
-  public static RsRedirect permanently(String redirectUrl) {
+  public static RsRedirect permanent(String redirectUrl) {
     return new RsRedirect(redirectUrl, HttpURLConnection.HTTP_MOVED_PERM);
   }
   

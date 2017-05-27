@@ -56,9 +56,9 @@ public final class ServletApiSupport {
       resp.setStatus(status.code);
 
       // Handle redirects
-      if (status.code == HttpURLConnection.HTTP_MOVED_TEMP) {
+      if (status.code == HttpURLConnection.HTTP_MOVED_TEMP || status.code == HttpURLConnection.HTTP_MOVED_PERM) {
         resp.sendRedirect(status.redirectUrl);
-
+        
         return;
       }
 
