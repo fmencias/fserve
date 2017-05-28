@@ -52,11 +52,21 @@ public final class ServletApiSupport {
     try {
       Response response = take.ack(new TkRequestWrap(req));
 
+      for (Cookie each : response.cookies()) {
+        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(each.name(), each.value());
+        cookie.setPath(each.path());
+        cookie.setMaxAge(each.expirationTimeInSeconds());
+        
+        resp.addCookie(cookie);
+      }
+
       Status status = response.status();
       resp.setStatus(status.code);
 
       // Handle redirects
       if (status.code == HttpURLConnection.HTTP_MOVED_TEMP || status.code == HttpURLConnection.HTTP_MOVED_PERM) {
+
+
         resp.sendRedirect(status.redirectUrl);
         
         return;
@@ -65,14 +75,6 @@ public final class ServletApiSupport {
       Map<String, String> header = response.header();
       for (String key : header.keySet()) {
         resp.setHeader(key, header.get(key));
-      }
-
-      for (Cookie each : response.cookies()) {
-        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(each.name(), each.value());
-        cookie.setPath(each.path());
-        cookie.setMaxAge(each.expirationTimeInSeconds());
-        
-        resp.addCookie(cookie);
       }
 
       ServletOutputStream out = resp.getOutputStream();
