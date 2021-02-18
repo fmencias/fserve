@@ -7,10 +7,9 @@ import com.clouway.friendlyserve.Status;
 import com.clouway.friendlyserve.Take;
 import com.clouway.friendlyserve.TkRequestWrap;
 import com.google.common.io.ByteStreams;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -53,7 +52,7 @@ public final class ServletApiSupport {
       Response response = take.ack(new TkRequestWrap(req));
 
       for (Cookie each : response.cookies()) {
-        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(each.name(), each.value());
+    	  jakarta.servlet.http.Cookie cookie = new jakarta.servlet.http.Cookie(each.name(), each.value());
         cookie.setPath(each.path());
         cookie.setMaxAge(each.expirationTimeInSeconds());
         cookie.setSecure(each.isSecured());
